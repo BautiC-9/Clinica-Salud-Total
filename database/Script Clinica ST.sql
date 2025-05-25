@@ -81,7 +81,6 @@ INSERT INTO especialidad (nombre, descripcion, id_estado) VALUES
 ('Cardiología', 'Diagnóstico y tratamiento de enfermedades del corazón.', 1),
 ('Ginecología', 'Atención de salud femenina y control ginecológico.', 1);
 
--- Tabla persona
 CREATE TABLE persona (
     id_persona INT AUTO_INCREMENT PRIMARY KEY, 
     dni VARCHAR(20) NOT NULL UNIQUE, 
@@ -93,20 +92,28 @@ CREATE TABLE persona (
     id_rol INT,
     id_especialidad INT,    
     id_estado INT NOT NULL,
+    fecha_nacimiento DATE NOT NULL,
+    edad INT,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    
     ultima_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    
+
     FOREIGN KEY (id_rol) REFERENCES rol(id_rol),    
     FOREIGN KEY (id_especialidad) REFERENCES especialidad(id_especialidad),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
-INSERT INTO persona (dni, nombre, apellido, email, telefono, direccion, id_rol, id_especialidad, id_estado)
+
+INSERT INTO persona (
+    dni, nombre, apellido, email, telefono, direccion, 
+    id_rol, id_especialidad, id_estado, fecha_nacimiento
+)
 VALUES
-('30123456', 'Lucía', 'Gómez', 'lucia.gomez@mail.com', '3624123456', 'Av. 9 de Julio 123', 4, NULL, 1),
-('28999111', 'Carlos', 'Pérez', 'carlos.perez@mail.com', '3624001122', 'Calle Falsa 456', 4, NULL, 1),
-('31455678', 'Valeria', 'López', 'valeria.lopez@mail.com', '3624113344', 'Mitre 789', 2, NULL, 1),
-('27654321', 'Miguel', 'Fernández', 'miguel.fernandez@mail.com', '3624332211', 'Belgrano 150', 3, 1, 1),
-('30887766', 'Paula', 'Martínez', 'paula.martinez@mail.com', '3624556677', 'Urquiza 1020', 3, 2, 1),
-('29550123', 'Diego', 'Ramírez', 'diego.ramirez@mail.com', '3624998877', 'España 99', 3, 4, 1);
+('30123456', 'Lucía', 'Gómez', 'lucia.gomez@mail.com', '3624123456', 'Av. 9 de Julio 123', 4, NULL, 1, '1990-05-14'),
+('28999111', 'Carlos', 'Pérez', 'carlos.perez@mail.com', '3624001122', 'Calle Falsa 456', 4, NULL, 1, '1985-08-22'),
+('31455678', 'Valeria', 'López', 'valeria.lopez@mail.com', '3624113344', 'Mitre 789', 2, NULL, 1, '1992-03-30'),
+('27654321', 'Miguel', 'Fernández', 'miguel.fernandez@mail.com', '3624332211', 'Belgrano 150', 3, 1, 1, '1980-12-05'),
+('30887766', 'Paula', 'Martínez', 'paula.martinez@mail.com', '3624556677', 'Urquiza 1020', 3, 2, 1, '1995-07-19'),
+('29550123', 'Diego', 'Ramírez', 'diego.ramirez@mail.com', '3624998877', 'España 99', 3, 4, 1, '1998-01-11');
+
 
 -- Tabla paciente
 CREATE TABLE paciente (
@@ -126,15 +133,19 @@ VALUES
 CREATE TABLE profesional (
     id_profesional INT AUTO_INCREMENT PRIMARY KEY,
     id_persona INT NOT NULL UNIQUE,
+	id_especialidad INT NOT NULL,
     matricula_profesional VARCHAR(50),
     id_estado INT NOT NULL,
     FOREIGN KEY (id_persona) REFERENCES persona(id_persona),
+    FOREIGN KEY (id_especialidad) REFERENCES especialidad(id_especialidad),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
-INSERT INTO profesional (id_persona, matricula_profesional, id_estado)
+INSERT INTO profesional (id_persona, id_especialidad, matricula_profesional, id_estado)
 VALUES
-(3, 'M12345', 1),
-(4, 'M67890', 1);
+(4, 2, 'M12345', 1),
+(5, 3, 'M67890', 1),
+(6, 4, 'M8394', 1)
+;
 
 -- Tabla usuario
 CREATE TABLE usuario (
