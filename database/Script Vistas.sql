@@ -90,5 +90,5 @@ FROM paciente_tutor pt
 JOIN paciente pa ON pt.id_paciente = pa.id_paciente
 JOIN persona p ON pa.id_persona = p.id_persona
 JOIN tutor t ON pt.id_tutor = t.id_tutor
-JOIN persona per_t ON t.id_persona = per_t.id_persona;
+JOIN persona per_t ON t.id_persona = per_t.id_persona
 WHERE p.id_estado = 1;  -- Mostrar solo profesionales activos
