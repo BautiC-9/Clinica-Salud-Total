@@ -5,7 +5,7 @@ USE clinica;
 
 -- Tabla entidad
 CREATE TABLE entidad (
-    id_entidad INT AUTO_INCREMENT PRIMARY KEY,
+    id_entidad BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL UNIQUE,
     descripcion VARCHAR(255)
 );
@@ -23,10 +23,10 @@ INSERT INTO entidad (nombre, descripcion) VALUES
 
 -- Tabla estado
 CREATE TABLE estado (
-    id_estado INT AUTO_INCREMENT PRIMARY KEY,
+    id_estado BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     descripcion VARCHAR(255),
-    id_entidad INT NOT NULL,
+    id_entidad BIGINT NOT NULL,
     FOREIGN KEY (id_entidad) REFERENCES entidad(id_entidad)
 );
 INSERT INTO estado (nombre, descripcion, id_entidad) VALUES
@@ -42,6 +42,7 @@ INSERT INTO estado (nombre, descripcion, id_entidad) VALUES
 ('Cancelado', 'Turno que fue cancelado por el paciente o profesional', 5),
 ('Reprogramado', 'Turno que fue re-agendado para otra fecha', 5),
 ('Confirmado', 'Turno confirmado por el paciente', 5),
+('Atendido', 'Turno atendido por profesional', 5),
 ('Pendiente', 'Usuario pendiente de validación', 6),
 ('Activo', 'Usuario con acceso completo al sistema', 6),
 ('Inactivo', 'Usuario sin acceso al sistema', 6),
@@ -56,24 +57,24 @@ INSERT INTO estado (nombre, descripcion, id_entidad) VALUES
 
 -- Tabla rol
 CREATE TABLE rol (
-    id_rol INT AUTO_INCREMENT PRIMARY KEY,
+    id_rol BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100),
     descripcion VARCHAR(200),
-    CONSTRAINT chk_rol_nombre CHECK (nombre IN ('administrador', 'secretaria', 'especialista', 'paciente', 'tutor'))
+    CONSTRAINT chk_rol_nombre CHECK (nombre IN ('administrador', 'secretaria', 'profesional', 'paciente', 'tutor'))
 );
 INSERT INTO rol (nombre, descripcion) VALUES
 ('administrador', 'Acceso completo al sistema'),
 ('secretaria', 'Gestión de turnos y pacientes'),
-('especialista', 'Consulta y atención de turnos'),
+('profesional', 'Consulta y atención de turnos'),
 ('paciente', 'Acceso a turnos desde la web'),
 ('tutor', 'Acceso limitado para tutor de pacientes menores');
 
 -- Tabla especialidad
 CREATE TABLE especialidad (
-    id_especialidad INT AUTO_INCREMENT PRIMARY KEY,
+    id_especialidad BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     descripcion VARCHAR(255),
-    id_estado INT,
+    id_estado BIGINT,
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
 INSERT INTO especialidad (nombre, descripcion, id_estado) VALUES
@@ -84,18 +85,19 @@ INSERT INTO especialidad (nombre, descripcion, id_estado) VALUES
 
 -- Tabla persona
 CREATE TABLE persona (
-    id_persona INT AUTO_INCREMENT PRIMARY KEY, 
+    id_persona BIGINT AUTO_INCREMENT PRIMARY KEY, 
     dni VARCHAR(20) NOT NULL UNIQUE, 
     nombre VARCHAR(50) NOT NULL, 
     apellido VARCHAR(50) NOT NULL, 
-    email VARCHAR(100) NOT NULL UNIQUE, 
+    email VARCHAR(100) NOT NULL UNIQUE,
+    contrasenia VARCHAR (100) NOT NULL UNIQUE,
     telefono VARCHAR(20), 
     direccion VARCHAR(255), 
-    id_rol INT,
-    id_especialidad INT,    
-    id_estado INT NOT NULL,
+    id_rol BIGINT,
+    id_especialidad BIGINT,    
+    id_estado BIGINT NOT NULL,
     fecha_nacimiento DATE NOT NULL,
-    edad INT,
+    edad BIGINT,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    
     ultima_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    
 
@@ -105,25 +107,25 @@ CREATE TABLE persona (
 );
 
 INSERT INTO persona (
-    dni, nombre, apellido, email, telefono, direccion, 
+    dni, nombre, apellido, email, contrasenia, telefono, direccion, 
     id_rol, id_especialidad, id_estado, fecha_nacimiento
 )
 VALUES
-('30123456', 'Lucía', 'Gómez', 'lucia.gomez@mail.com', '3624123456', 'Av. 9 de Julio 123', 4, NULL, 1, '1990-05-14'),
-('28999111', 'Carlos', 'Pérez', 'carlos.perez@mail.com', '3624001122', 'Calle Falsa 456', 4, NULL, 1, '1985-08-22'),
-('31455678', 'Valeria', 'López', 'valeria.lopez@mail.com', '3624113344', 'Mitre 789', 2, NULL, 1, '1992-03-30'),
-('27654321', 'Miguel', 'Fernández', 'miguel.fernandez@mail.com', '3624332211', 'Belgrano 150', 3, 1, 1, '1980-12-05'),
-('30887766', 'Paula', 'Martínez', 'paula.martinez@mail.com', '3624556677', 'Urquiza 1020', 3, 2, 1, '1995-07-19'),
-('29550123', 'Diego', 'Ramírez', 'diego.ramirez@mail.com', '3624998877', 'España 99', 3, 4, 1, '1998-01-11'),
-('49111222', 'Tomás', 'Pérez', 'tomas.perez@example.com', '1133445566', 'Av. Siempre Viva 742', 4, NULL, 1, '2012-08-20'),
-('30222333', 'Laura', 'González', 'laura.tutor@example.com', '1144556677', 'Calle Falsa 123', NULL, NULL, 1, '1980-05-15');
+('30123456', 'Lucía', 'Gómez', 'lucia.gomez@mail.com','V7p$2xRm9Q', '3624123456', 'Av. 9 de Julio 123', 4, NULL, 1, '1990-05-14'),
+('28999111', 'Carlos', 'Pérez', 'carlos.perez@mail.com', 'm#W5zU8cYt', '3624001122', 'Calle Falsa 456', 4, NULL, 1, '1985-08-22'),
+('31455678', 'Valeria', 'López', 'valeria.lopez@mail.com','Lp3&X9aHsG', '3624113344', 'Mitre 789', 2, NULL, 1, '1992-03-30'),
+('27654321', 'Miguel', 'Fernández', 'miguel.fernandez@mail.com', 'Jv4!TdRn6B', '3624332211', 'Belgrano 150', 3, 2, 1, '1980-12-05'),
+('30887766', 'Paula', 'Martínez', 'paula.martinez@mail.com', 'zY8@KsVm1Q', '3624556677', 'Urquiza 1020', 3, 2, 1, '1995-07-19'),
+('29550123', 'Diego', 'Ramírez', 'diego.ramirez@mail.com', 'Fc9*RhEj7L', '3624998877', 'España 99', 3, 4, 1, '1998-01-11'),
+('49111222', 'Tomás', 'Pérez', 'tomas.perez@example.com', 'Nx6%GwZo2T', '1133445566', 'Av. Siempre Viva 742', 4, NULL, 1, '2012-08-20'),
+('30222333', 'Laura', 'González', 'laura.tutor@example.com', 'Sb1^VqLd4M', '1144556677', 'Calle Falsa 123', NULL, NULL, 1, '1980-05-15');
 
 -- Tabla tutor
 CREATE TABLE tutor (
-    id_tutor INT AUTO_INCREMENT PRIMARY KEY,
-    id_persona INT NOT NULL UNIQUE,
+    id_tutor BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_persona BIGINT NOT NULL UNIQUE,
     parentesco VARCHAR(100),
-    id_estado INT NOT NULL,
+    id_estado BIGINT NOT NULL,
     FOREIGN KEY (id_persona) REFERENCES persona(id_persona),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
@@ -132,10 +134,10 @@ VALUES (8, 'Madre', 1);
 
 -- Tabla paciente
 CREATE TABLE paciente (
-    id_paciente INT AUTO_INCREMENT PRIMARY KEY,
-    id_persona INT NOT NULL UNIQUE,
+    id_paciente BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_persona BIGINT NOT NULL UNIQUE,
     obra_social VARCHAR(100),
-    id_estado INT NOT NULL,
+    id_estado BIGINT NOT NULL,
     FOREIGN KEY (id_persona) REFERENCES persona(id_persona),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
@@ -147,8 +149,8 @@ VALUES
 
 -- Tabla paciente_tutor
 CREATE TABLE paciente_tutor (
-    id_paciente INT NOT NULL,
-    id_tutor INT NOT NULL,
+    id_paciente BIGINT NOT NULL,
+    id_tutor BIGINT NOT NULL,
     PRIMARY KEY (id_paciente, id_tutor),
     FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente),
     FOREIGN KEY (id_tutor) REFERENCES tutor(id_tutor)
@@ -158,11 +160,11 @@ VALUES (3, 1);
 
 -- Tabla profesional
 CREATE TABLE profesional (
-    id_profesional INT AUTO_INCREMENT PRIMARY KEY,
-    id_persona INT NOT NULL UNIQUE,
-	id_especialidad INT NOT NULL,
+    id_profesional BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_persona BIGINT NOT NULL UNIQUE,
+	id_especialidad BIGINT NOT NULL,
     matricula_profesional VARCHAR(50),
-    id_estado INT NOT NULL,
+    id_estado BIGINT NOT NULL,
     FOREIGN KEY (id_persona) REFERENCES persona(id_persona),
     FOREIGN KEY (id_especialidad) REFERENCES especialidad(id_especialidad),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
@@ -170,17 +172,17 @@ CREATE TABLE profesional (
 INSERT INTO profesional (id_persona, id_especialidad, matricula_profesional, id_estado)
 VALUES
 (4, 2, 'M12345', 1),
-(5, 3, 'M67890', 1),
+(5, 2, 'M67890', 1),
 (6, 4, 'M8394', 1)
 ;
 
 -- Tabla usuario
 CREATE TABLE usuario (
-    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre_usuario VARCHAR(50) NOT NULL UNIQUE,
     contrasena VARCHAR(100) NOT NULL,
-    id_persona INT,
-    id_estado INT NOT NULL,
+    id_persona BIGINT,
+    id_estado BIGINT NOT NULL,
     FOREIGN KEY (id_persona) REFERENCES persona(id_persona),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
@@ -193,12 +195,12 @@ VALUES
 
 -- Tabla horario_disponible
 CREATE TABLE horario_disponible (    
-    id_horario INT AUTO_INCREMENT PRIMARY KEY,    
-    id_profesional INT,    
+    id_horario BIGINT AUTO_INCREMENT PRIMARY KEY,    
+    id_profesional BIGINT,
     dia_semana ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo') NOT NULL,    
     hora_inicio TIME NOT NULL,   
     hora_fin TIME NOT NULL,    
-    id_estado INT NOT NULL,
+    id_estado BIGINT NOT NULL,
     FOREIGN KEY (id_profesional) REFERENCES persona(id_persona),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
@@ -213,13 +215,13 @@ VALUES
 
 -- Tabla turno
 CREATE TABLE turno (    
-    id_turno INT AUTO_INCREMENT PRIMARY KEY,
+    id_turno BIGINT AUTO_INCREMENT PRIMARY KEY,
     comprobante VARCHAR(50) NOT NULL,
-    id_paciente INT,
-    id_profesional INT,
+    id_paciente BIGINT,
+    id_profesional BIGINT,
     fecha_hora DATETIME NOT NULL,
     duracion INT NOT NULL,
-    id_estado INT NOT NULL,
+    id_estado BIGINT NOT NULL,
     observaciones TEXT DEFAULT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     ultima_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -229,20 +231,20 @@ CREATE TABLE turno (
 );
 INSERT INTO turno (comprobante, id_paciente, id_profesional, fecha_hora, duracion, id_estado, observaciones)
 VALUES
-('ST-20250506-000001', 1, 3, '2025-05-10 09:00:00', 30, 1, 'Consulta general de salud'), 
-('ST-20250506-000002', 2, 3, '2025-05-11 10:00:00', 30, 1, 'Chequeo pediátrico'), 
-('ST-20250506-000003', 3, 4, '2025-05-12 14:00:00', 45, 2, 'Consulta cardiológica'), 
-('ST-20250506-000004', 4, 3, '2025-05-13 11:00:00', 30, 1, 'Consulta general'), 
-('ST-20250506-000005', 5, 4, '2025-05-14 16:00:00', 45, 3, 'Consulta ginecológica'), 
-('ST-20250506-000006', 6, 3, '2025-05-15 10:00:00', 30, 2, 'Chequeo general');
+('ST-20250506-000001', 1, 1, '2025-05-10 09:00:00', 30, 10, 'Consulta pediátrica'), 
+('ST-20250506-000002', 2, 2, '2025-05-11 10:00:00', 30, 11, 'Chequeo pediátrico'), 
+('ST-20250506-000003', 3, 3, '2025-05-12 14:00:00', 45, 11, 'Consulta pediátrica'), 
+('ST-20250506-000004', 4, 3, '2025-05-13 11:00:00', 30, 12, 'Consulta pediátrica'), 
+('ST-20250506-000005', 5, 2, '2025-05-14 16:00:00', 45, 13, 'Consulta ginecológica'), 
+('ST-20250506-000006', 6, 1, '2025-05-15 10:00:00', 30, 13, 'Consulta general');
 
 -- Tabla historial_estado_turno
 CREATE TABLE historial_estado_turno (    
-    id_historial INT AUTO_INCREMENT PRIMARY KEY,
-    id_turno INT,
+    id_historial BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_turno BIGINT,
     fecha_cambio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estado_anterior INT NOT NULL,
-    estado_nuevo INT NOT NULL,
+    estado_anterior BIGINT NOT NULL,
+    estado_nuevo BIGINT NOT NULL,
     observacion TEXT DEFAULT NULL,
     FOREIGN KEY (id_turno) REFERENCES turno(id_turno),
     FOREIGN KEY (estado_anterior) REFERENCES estado(id_estado),
@@ -251,11 +253,11 @@ CREATE TABLE historial_estado_turno (
 
 -- Tabla monto
 CREATE TABLE monto (
-    id_monto INT AUTO_INCREMENT PRIMARY KEY,
-    id_turno INT,
+    id_monto BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_turno BIGINT,
     fecha_pago DATE,
     monto DECIMAL(10,2) NOT NULL,
-    id_estado INT NOT NULL,
+    id_estado BIGINT NOT NULL,
     FOREIGN KEY (id_turno) REFERENCES turno(id_turno),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
@@ -270,31 +272,31 @@ VALUES
 
 -- Tabla consulta_web
 CREATE TABLE consulta_web (
-    id_consulta INT AUTO_INCREMENT PRIMARY KEY,
+    id_consulta BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     correo VARCHAR(100) NOT NULL,
     mensaje TEXT NOT NULL,
     fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    id_estado INT NOT NULL,
+    id_estado BIGINT NOT NULL,
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
 INSERT INTO consulta_web (nombre, correo, mensaje, id_estado)
 VALUES
-('Juan Pérez', 'juan.perez@gmail.com', 'Quisiera saber los horarios de atención del médico general.', 1), 
-('Ana García', 'ana.garcia@gmail.com', '¿Cómo puedo agendar un turno para pediatría?', 2), 
-('Luis Martínez', 'luis.martinez@gmail.com', 'Tengo dudas sobre los servicios de cardiología.', 3), 
-('Marta López', 'marta.lopez@gmail.com', '¿Cuáles son los requisitos para un turno con ginecología?', 1), 
-('Carlos Rodríguez', 'carlos.rodriguez@gmail.com', 'Necesito cancelar un turno con el doctor.', 2), 
-('Elena Sánchez', 'elena.sanchez@gmail.com', '¿Hay disponibilidad para turno en la próxima semana?', 3);
+('Juan Pérez', 'juan.perez@gmail.com', 'Quisiera saber los horarios de atención del médico general.', 20), 
+('Ana García', 'ana.garcia@gmail.com', '¿Cómo puedo agendar un turno para pediatría?', 21), 
+('Luis Martínez', 'luis.martinez@gmail.com', 'Tengo dudas sobre los servicios de cardiología.', 20), 
+('Marta López', 'marta.lopez@gmail.com', '¿Cuáles son los requisitos para un turno con ginecología?', 21), 
+('Carlos Rodríguez', 'carlos.rodriguez@gmail.com', 'Necesito cancelar un turno con el doctor.', 20), 
+('Elena Sánchez', 'elena.sanchez@gmail.com', '¿Hay disponibilidad para turno en la próxima semana?', 20);
 
 -- Tabla asistencia_turno
 CREATE TABLE asistencia_turno (
-    id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
-    id_turno INT NOT NULL,
-    asistio INT NOT NULL, -- 1: asistió, 0: no asistió
+    id_asistencia BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_turno BIGINT NOT NULL,
+    asistio BIGINT NOT NULL, -- 1: asistió, 0: no asistió
     observaciones TEXT,
     fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    id_estado INT NOT NULL,
+    id_estado BIGINT NOT NULL,
     FOREIGN KEY (id_turno) REFERENCES turno(id_turno),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
