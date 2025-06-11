@@ -231,12 +231,12 @@ CREATE TABLE turno (
 );
 INSERT INTO turno (comprobante, id_paciente, id_profesional, fecha_hora, duracion, id_estado, observaciones)
 VALUES
-('ST-20250506-000001', 1, 1, '2025-05-10 09:00:00', 30, 10, 'Consulta pediátrica'), 
-('ST-20250506-000002', 2, 2, '2025-05-11 10:00:00', 30, 11, 'Chequeo pediátrico'), 
-('ST-20250506-000003', 3, 3, '2025-05-12 14:00:00', 45, 11, 'Consulta pediátrica'), 
-('ST-20250506-000004', 4, 3, '2025-05-13 11:00:00', 30, 12, 'Consulta pediátrica'), 
-('ST-20250506-000005', 5, 2, '2025-05-14 16:00:00', 45, 13, 'Consulta ginecológica'), 
-('ST-20250506-000006', 6, 1, '2025-05-15 10:00:00', 30, 13, 'Consulta general');
+('ST-20250506-000001', 1, 4, '2025-05-10 09:00:00', 30, 10, 'Consulta pediátrica'), 
+('ST-20250506-000002', 2, 5, '2025-05-11 10:00:00', 30, 11, 'Chequeo pediátrico'), 
+('ST-20250506-000003', 3, 6, '2025-05-12 14:00:00', 45, 11, 'Consulta pediátrica'), 
+('ST-20250506-000004', 4, 6, '2025-05-13 11:00:00', 30, 12, 'Consulta pediátrica'), 
+('ST-20250506-000005', 5, 5, '2025-05-14 16:00:00', 45, 13, 'Consulta ginecológica'), 
+('ST-20250506-000006', 6, 4, '2025-05-15 10:00:00', 30, 13, 'Consulta general');
 
 -- Tabla historial_estado_turno
 CREATE TABLE historial_estado_turno (    
