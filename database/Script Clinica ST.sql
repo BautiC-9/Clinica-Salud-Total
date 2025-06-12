@@ -38,10 +38,10 @@ INSERT INTO estado (nombre, descripcion, id_entidad) VALUES
 ('No Disponible', 'Profesional sin agenda activa', 3),
 ('Disponible', 'Horario disponible para asignar turnos', 4),
 ('No Disponible', 'Horario bloqueado o fuera de servicio', 4),
+('Confirmado', 'Turno confirmado por el paciente', 5),
 ('Programado', 'Turno asignado y pendiente de atención', 5),
 ('Cancelado', 'Turno que fue cancelado por el paciente o profesional', 5),
 ('Reprogramado', 'Turno que fue re-agendado para otra fecha', 5),
-('Confirmado', 'Turno confirmado por el paciente', 5),
 ('Atendido', 'Turno atendido por profesional', 5),
 ('Pendiente', 'Usuario pendiente de validación', 6),
 ('Activo', 'Usuario con acceso completo al sistema', 6),
@@ -233,10 +233,10 @@ INSERT INTO turno (comprobante, id_paciente, id_profesional, fecha_hora, duracio
 VALUES
 ('ST-20250506-000001', 1, 4, '2025-05-10 09:00:00', 30, 10, 'Consulta pediátrica'), 
 ('ST-20250506-000002', 2, 5, '2025-05-11 10:00:00', 30, 11, 'Chequeo pediátrico'), 
-('ST-20250506-000003', 3, 6, '2025-05-12 14:00:00', 45, 11, 'Consulta pediátrica'), 
-('ST-20250506-000004', 4, 6, '2025-05-13 11:00:00', 30, 12, 'Consulta pediátrica'), 
-('ST-20250506-000005', 5, 5, '2025-05-14 16:00:00', 45, 13, 'Consulta ginecológica'), 
-('ST-20250506-000006', 6, 4, '2025-05-15 10:00:00', 30, 13, 'Consulta general');
+('ST-20250506-000003', 7, 6, '2025-05-12 14:00:00', 45, 11, 'Consulta pediátrica'), 
+('ST-20250506-000004', 7, 6, '2025-05-13 11:00:00', 30, 12, 'Consulta pediátrica'), 
+('ST-20250506-000005', 2, 5, '2025-05-14 16:00:00', 45, 13, 'Consulta ginecológica'), 
+('ST-20250506-000006', 1, 4, '2025-05-15 10:00:00', 30, 13, 'Consulta general');
 
 -- Tabla historial_estado_turno
 CREATE TABLE historial_estado_turno (    
