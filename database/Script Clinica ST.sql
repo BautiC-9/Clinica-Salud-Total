@@ -200,7 +200,7 @@ VALUES (8, 'Madre', 1);
 CREATE TABLE paciente (
     id_paciente BIGINT AUTO_INCREMENT PRIMARY KEY,
     id_persona BIGINT NOT NULL UNIQUE,
-    obra_social VARCHAR(100),
+    obra_social VARCHAR(100) DEFAULT 'sin obra social',
     id_estado BIGINT NOT NULL,
     FOREIGN KEY (id_persona) REFERENCES persona(id_persona),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
