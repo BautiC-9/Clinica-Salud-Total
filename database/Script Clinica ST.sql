@@ -117,8 +117,10 @@ INSERT INTO persona (
 VALUES
 -- 1. ADMINISTRADOR
 ('28999111', 'Carlos', 'Pérez', 'carlos.perez@mail.com', '3624001122', 'Calle Falsa 456', 1, NULL, 1, '1985-08-22'),
+
 -- 2. SECRETARIA
 ('31455678', 'Valeria', 'López', 'valeria.lopez@mail.com', '3624113344', 'Mitre 789', 2, NULL, 1, '1992-03-30'),
+
 -- 3. PROFESIONALES
 ('27654321', 'Miguel', 'Fernández', 'miguel.fernandez@mail.com', '3624332211', 'Belgrano 150', 3, 1, 1, '1980-12-05'),
 ('30887766', 'Paula', 'Martínez', 'paula.martinez@mail.com', '3624556677', 'Urquiza 1020', 3, 2, 1, '1995-07-19'),
@@ -131,8 +133,9 @@ VALUES
 ('66666666', 'Marta', 'López', 'marta.lopez@clinica.com', '1234567895', 'Calle 6', 3, 3, 1, '1988-05-05'),
 ('77777777', 'Diego', 'Sosa', 'diego.sosa@clinica.com', '1234567896', 'Calle 7', 3, 4, 1, '1981-06-06'),
 ('88888888', 'Lucía', 'García', 'lucia.garcia@clinica.com', '1234567897', 'Calle 8', 3, 4, 1, '1978-07-07'),
+
 -- 4. PACIENTES
-('49111222', 'Tomás', 'Pérez', 'tomas.perez@example.com', '1133445566', 'Av. Siempre Viva 742', 4, NULL, 1, '2005-08-20'),
+('49111222', 'Tomás', 'Pérez', 'tomas.perez@mail.com', '1133445566', 'Calle ficticia 54', 4, NULL, 1, '2005-08-20'),
 ('99900001', 'Pedro', 'Ramírez', 'pedro.ramirez@mail.com', '3410000001', 'Calle 10', 4, NULL, 1, '2000-01-01'),
 ('99900002', 'Julieta', 'Suárez', 'julieta.suarez@mail.com', '3410000002', 'Calle 11', 4, NULL, 1, '1998-02-02'),
 ('99900003', 'Martín', 'Bravo', 'martin.bravo@mail.com', '3410000003', 'Calle 12', 4, NULL, 1, '2002-03-03'),
@@ -153,13 +156,13 @@ VALUES
 ('99900017', 'Marina', 'Torres', 'marina.torres@mail.com', '3410000017', 'Calle 26', 4, NULL, 1, '1993-05-12'),
 ('99900018', 'Nicolás', 'Vargas', 'nicolas.vargas@mail.com', '3410000018', 'Calle 27', 4, NULL, 1, '1990-09-21'),
 ('99900019', 'Carolina', 'Medina', 'carolina.medina@mail.com', '3410000019', 'Calle 28', 4, NULL, 1, '1997-11-11'),
-('99900020', 'Ezequiel', 'Figueroa', 'ezequiel.figueroa@mail.com', '3410000020', 'Calle 29', 4, NULL, 1, '1988-03-03'),
-('99900021', 'Sabrina', 'Mendoza', 'sabrina.mendoza@mail.com', '3410000021', 'Calle 30', 4, NULL, 1, '1995-12-15'),
-('99900022', 'Gonzalo', 'Ruiz', 'gonzalo.ruiz@mail.com', '3410000022', 'Calle 31', 4, NULL, 1, '1992-07-07'),
-('99900023', 'Florencia', 'Cabrera', 'florencia.cabrera@mail.com', '3410000023', 'Calle 32', 4, NULL, 1, '1999-01-01'),
-('99900024', 'Matías', 'Campos', 'matias.campos@mail.com', '3410000024', 'Calle 33', 4, NULL, 1, '1994-08-19'),
-('99900025', 'Romina', 'Soto', 'romina.soto@mail.com', '3410000025', 'Calle 34', 4, NULL, 1, '1987-06-25'),
-('99900026', 'Bruno', 'Alonso', 'bruno.alonso@mail.com', '3410000026', 'Calle 35', 4, NULL, 1, '1996-10-10'),
+('99900020', 'Ezequiel', 'Figueroa', 'ezequiel.figueroa@mail.com', '3410000020', 'Calle 29', 4, NULL, 1, '2001-03-03'),
+('99900021', 'Sabrina', 'Mendoza', 'sabrina.mendoza@mail.com', '3410000021', 'Calle 30', 4, NULL, 1, '2002-12-15'),
+('99900022', 'Gonzalo', 'Ruiz', 'gonzalo.ruiz@mail.com', '3410000022', 'Calle 31', 4, NULL, 1, '2003-07-07'),
+('99900023', 'Florencia', 'Cabrera', 'florencia.cabrera@mail.com', '3410000023', 'Calle 32', 4, NULL, 1, '2004-01-01'),
+('99900024', 'Matías', 'Campos', 'matias.campos@mail.com', '3410000024', 'Calle 33', 4, NULL, 1, '2005-08-19'),
+('99900025', 'Romina', 'Soto', 'romina.soto@mail.com', '3410000025', 'Calle 34', 4, NULL, 1, '2006-06-25'),
+('99900026', 'Bruno', 'Alonso', 'bruno.alonso@mail.com', '3410000026', 'Calle 35', 4, NULL, 1, '2007-02-10'),
 
 -- PROFESIONALES NUEVOS
 ('88810001', 'Carla', 'Martínez', 'carla.martinez@salud.com', '3411000001', 'Av. Belgrano 123', 3, 1, 1, '1985-03-15'),
@@ -306,7 +309,6 @@ VALUES
 ('admin', 'admin123', 1, 1), 
 ('secretaria1', 'secretaria123', 2, 1),
 ('especialista1', 'especialista123', 3, 1),
-('paciente1', 'paciente123', 14, 1),
 -- especialistas
 ('cardio1', '1234', 3, 1),
 ('cardio2', '1234', 4, 1),
