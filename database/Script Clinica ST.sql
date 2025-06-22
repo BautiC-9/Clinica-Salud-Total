@@ -109,19 +109,18 @@ CREATE TABLE persona (
     FOREIGN KEY (id_especialidad) REFERENCES especialidad(id_especialidad),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
-
 INSERT INTO persona (
     dni, nombre, apellido, email, telefono, direccion, 
     id_rol, id_especialidad, id_estado, fecha_nacimiento
 )
 VALUES
--- 1. ADMINISTRADOR
+-- ADMINISTRADOR
 ('28999111', 'Carlos', 'Pérez', 'carlos.perez@mail.com', '3624001122', 'Calle Falsa 456', 1, NULL, 1, '1985-08-22'),
 
--- 2. SECRETARIA
+-- SECRETARIA
 ('31455678', 'Valeria', 'López', 'valeria.lopez@mail.com', '3624113344', 'Mitre 789', 2, NULL, 1, '1992-03-30'),
 
--- 3. PROFESIONALES
+-- PROFESIONALES
 ('27654321', 'Miguel', 'Fernández', 'miguel.fernandez@mail.com', '3624332211', 'Belgrano 150', 3, 1, 1, '1980-12-05'),
 ('30887766', 'Paula', 'Martínez', 'paula.martinez@mail.com', '3624556677', 'Urquiza 1020', 3, 2, 1, '1995-07-19'),
 ('29550123', 'Diego', 'Ramírez', 'diego.ramirez@mail.com', '3624998877', 'España 99', 3, 4, 1, '1998-01-11'),
@@ -134,7 +133,7 @@ VALUES
 ('77777777', 'Diego', 'Sosa', 'diego.sosa@clinica.com', '1234567896', 'Calle 7', 3, 4, 1, '1981-06-06'),
 ('88888888', 'Lucía', 'García', 'lucia.garcia@clinica.com', '1234567897', 'Calle 8', 3, 4, 1, '1978-07-07'),
 
--- 4. PACIENTES
+-- PACIENTES
 ('49111222', 'Tomás', 'Pérez', 'tomas.perez@mail.com', '1133445566', 'Calle ficticia 54', 4, NULL, 1, '2005-08-20'),
 ('99900001', 'Pedro', 'Ramírez', 'pedro.ramirez@mail.com', '3410000001', 'Calle 10', 4, NULL, 1, '2000-01-01'),
 ('99900002', 'Julieta', 'Suárez', 'julieta.suarez@mail.com', '3410000002', 'Calle 11', 4, NULL, 1, '1998-02-02'),
@@ -186,7 +185,6 @@ VALUES
 ('88810019', 'Verónica', 'Ledesma', 'veronica.ledesma@salud.com', '3411000019', 'Calle Pueyrredón 606', 3, 1, 1, '1986-08-13'),
 ('88810020', 'Gustavo', 'Ramírez', 'gustavo.ramirez@salud.com', '3411000020', 'Calle Paraná 707', 3, 2, 1, '1977-10-30');
 
-
 -- Tabla tutor
 CREATE TABLE tutor (
     id_tutor BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -196,8 +194,6 @@ CREATE TABLE tutor (
     FOREIGN KEY (id_persona) REFERENCES persona(id_persona),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
-INSERT INTO tutor (id_persona, parentesco, id_estado)
-VALUES (8, 'Madre', 1);
 
 -- Tabla paciente
 CREATE TABLE paciente (
@@ -246,8 +242,6 @@ CREATE TABLE paciente_tutor (
     FOREIGN KEY (id_paciente) REFERENCES paciente(id_paciente),
     FOREIGN KEY (id_tutor) REFERENCES tutor(id_tutor)
 );
-INSERT INTO paciente_tutor (id_paciente, id_tutor)
-VALUES (3, 1);
 
 -- Tabla profesional
 CREATE TABLE profesional (
@@ -262,7 +256,7 @@ CREATE TABLE profesional (
 );
 INSERT INTO profesional (id_persona, id_especialidad, matricula_profesional, id_estado)
 VALUES
-(3, 2, 'M12345', 1),
+(3, 2, 'M12345', 1),     -- uno(8), dos(9), tres(7), cuatro(7)
 (4, 3, 'M67890', 1),
 (5, 4, 'M8394', 1),
 (6, 1, 'M11111', 1),  
@@ -273,26 +267,26 @@ VALUES
 (11, 3, 'M66666', 1), 
 (12, 4, 'M77777', 1),
 (13, 4, 'M88888', 1),
-(14, 1, 'M90001', 1),
-(15, 2, 'M90002', 1),
-(16, 3, 'M90003', 1),
-(17, 4, 'M90004', 1),
-(18, 1, 'M90005', 1),
-(19, 2, 'M90006', 1),
-(20, 3, 'M90007', 1),
-(21, 4, 'M90008', 1),
-(22, 1, 'M90009', 1),
-(23, 2, 'M90010', 1),
-(24, 1, 'M90011', 1),
-(25, 2, 'M90012', 1),
-(26, 3, 'M90013', 1),
-(27, 4, 'M90014', 1),
-(28, 1, 'M90015', 1),
-(29, 2, 'M90016', 1),
-(30, 3, 'M90017', 1),
-(31, 4, 'M90018', 1),
-(32, 1, 'M90019', 1),
-(33, 2, 'M90020', 1);
+(41, 1, 'M90001', 1),
+(42, 2, 'M90002', 1),
+(43, 3, 'M90003', 1),
+(44, 4, 'M90004', 1),
+(45, 1, 'M90005', 1),
+(46, 2, 'M90006', 1),
+(47, 3, 'M90007', 1),
+(48, 4, 'M90008', 1),
+(49, 1, 'M90009', 1),
+(50, 2, 'M90010', 1),
+(51, 1, 'M90011', 1),
+(52, 2, 'M90012', 1),
+(53, 3, 'M90013', 1),
+(54, 4, 'M90014', 1),
+(55, 1, 'M90015', 1),
+(56, 2, 'M90016', 1),
+(57, 3, 'M90017', 1),
+(58, 4, 'M90018', 1),
+(59, 1, 'M90019', 1),
+(60, 2, 'M90020', 1);
 
 -- Tabla usuario
 CREATE TABLE usuario (
@@ -308,30 +302,52 @@ INSERT INTO usuario (nombre_usuario, contrasena, id_persona, id_estado)
 VALUES
 ('admin', 'admin123', 1, 1), 
 ('secretaria1', 'secretaria123', 2, 1),
-('especialista1', 'especialista123', 3, 1),
 -- especialistas
-('cardio1', '1234', 3, 1),
-('cardio2', '1234', 4, 1),
-('pedia1', '1234', 5, 1),
-('pedia2', '1234', 6, 1),
-('clinico1', '1234', 7, 1),
-('clinico2', '1234', 8, 1),
-('gine1', '1234', 9, 1),
-('gine2', '1234', 10, 1),
+('miguel_fernandez', 'profesional123', 3, 1),
+('paula_martinez', 'profesional123', 4, 1),
+('diego_ramirez', 'profesional123', 5, 1),
+('carlos_gomez', 'profesional123', 6, 1),
+('laura_martinez', 'profesional123', 7, 1),
+('luis_perez', 'profesional123', 8, 1),
+('ana_rivas', 'profesional123', 9, 1),
+('jose_fernandez', 'profesional123', 10, 1),
+('marta_lopez', 'profesional123', 11, 1),
+('diego_sosa', 'profesional123', 12, 1),
+('lucia_garcia', 'profesional123', 13, 1),
 -- pacientes
-('tomasperez', '123', 14, 1),
-('pedroramirez', '123', 15, 1),
-('julietasuarez', '123', 16, 1),
-('martinbravo', '123', 17, 1),
-('soledadmendoza', '123', 18, 1),
-('gustavoibanez', '123', 19, 1),
-('florenciabianchi', '123', 20, 1);
+('tomas_perez', 'paciente123', 14, 1),
+('pedro_ramirez', 'paciente123', 15, 1),
+('julieta_suarez', 'paciente123', 16, 1),
+('martin_bravo', 'paciente123', 17, 1),
+('soledad_mendoza', 'paciente123', 18, 1),
+('gustavo_ibanez', 'paciente123', 19, 1),
+('florencia_bianchi', 'paciente123', 20, 1),
+('valentina_lopez', 'paciente123', 21, 1),
+('diego_fernandez', 'paciente123', 22, 1),
+('camila_gomez', 'paciente123', 23, 1),
+('lucas_ruiz', 'paciente123', 24, 1),
+('sofia_martinez', 'paciente123', 25, 1),
+('agustin_rojas', 'paciente123', 26, 1),
+('micaela_vega', 'paciente123', 27, 1),
+('matias_silva', 'paciente123', 28, 1),
+('lucia_castro', 'paciente123', 29, 1),
+('facundo_ortiz', 'paciente123', 30, 1),
+('marina_torres', 'paciente123', 31, 1),
+('nicolas_vargas', 'paciente123', 32, 1),
+('carolina_medina', 'paciente123', 33, 1),
+('ezequiel_figueroa', 'paciente123', 34, 1),
+('sabrina_mendoza', 'paciente123', 35, 1),
+('gonzalo_ruiz', 'paciente123', 36, 1),
+('florencia_cabrera', 'paciente123', 37, 1),
+('matias_campos', 'paciente123', 38, 1),
+('romina_soto', 'paciente123', 39, 1),
+('bruno_alonso', 'paciente123', 40, 1);
 
 -- Tabla horario_disponible
 CREATE TABLE horario_disponible (    
     id_horario BIGINT AUTO_INCREMENT PRIMARY KEY,    
     id_profesional BIGINT,    
-    dia_semana ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo') NOT NULL,    
+    dia_semana ENUM('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo') NOT NULL,    
     hora_inicio TIME NOT NULL,   
     hora_fin TIME NOT NULL,    
     id_estado BIGINT NOT NULL,
@@ -340,49 +356,99 @@ CREATE TABLE horario_disponible (
 );
 INSERT INTO horario_disponible (id_profesional, dia_semana, hora_inicio, hora_fin, id_estado)
 VALUES
--- Cardiólogos
-(3, 'Lunes', '09:00:00', '12:00:00', 1), 
-(3, 'Martes', '09:00:00', '12:00:00', 1),
-(3, 'Miércoles', '09:00:00', '12:00:00', 1),
-(3, 'Jueves', '14:00:00', '18:00:00', 1),
-(3, 'Viernes', '09:00:00', '12:00:00', 1),
-(4, 'Lunes', '09:00:00', '12:00:00', 1),
--- Pediatras
+-- Profesional 3 (Lunes y Martes)
 (3, 'Lunes', '09:00:00', '12:00:00', 1),
-(3, 'Jueves', '09:00:00', '12:00:00', 1),
-(4, 'Martes', '09:00:00', '12:00:00', 1),
-(4, 'Viernes', '09:00:00', '12:00:00', 1),
--- Clínicos
-(5, 'Miércoles', '09:00:00', '12:00:00', 1),
+(3, 'Martes', '09:00:00', '12:00:00', 1),
+-- Profesional 4 (Miércoles y Jueves)
+(4, 'Miercoles', '09:00:00', '12:00:00', 1),
+(4, 'Jueves', '09:00:00', '12:00:00', 1),
+-- Profesional 5 (Viernes y Sábado)
 (5, 'Viernes', '09:00:00', '12:00:00', 1),
+(5, 'Sabado', '09:00:00', '12:00:00', 1),
+-- Profesional 6 (Lunes y Martes)
 (6, 'Lunes', '09:00:00', '12:00:00', 1),
 (6, 'Martes', '09:00:00', '12:00:00', 1),
--- Ginecólogos
-(7, 'Miércoles', '09:00:00', '12:00:00', 1),
+-- Profesional 7 (Miércoles y Jueves)
+(7, 'Miercoles', '09:00:00', '12:00:00', 1),
 (7, 'Jueves', '09:00:00', '12:00:00', 1),
-(8, 'Lunes', '09:00:00', '12:00:00', 1),
+-- Profesional 8 (Viernes y Sábado)
 (8, 'Viernes', '09:00:00', '12:00:00', 1),
--- Carlos Gómez 
-(7, 'Lunes', '14:00:00', '18:00:00', 1),
-(7, 'Miércoles', '14:00:00', '18:00:00', 1),
--- Laura Martínez
-(8, 'Martes', '14:00:00', '18:00:00', 1),
-(8, 'Jueves', '14:00:00', '18:00:00', 1),
--- Luis Pérez 
-(9, 'Lunes', '14:00:00', '18:00:00', 1),
-(9, 'Jueves', '14:00:00', '18:00:00', 1),
--- Ana Rivas 
-(10, 'Martes', '14:00:00', '18:00:00', 1),
-(10, 'Viernes', '14:00:00', '18:00:00', 1),
--- José Fernández 
-(11, 'Miércoles', '14:00:00', '18:00:00', 1),
-(11, 'Viernes', '14:00:00', '18:00:00', 1),
--- Marta López 
-(12, 'Lunes', '14:00:00', '18:00:00', 1),
-(12, 'Martes', '14:00:00', '18:00:00', 1),
--- Diego Sosa 
-(13, 'Miércoles', '14:00:00', '18:00:00', 1),
-(13, 'Jueves', '14:00:00', '18:00:00', 1);
+(8, 'Sabado', '09:00:00', '12:00:00', 1),
+-- Profesional 9 (Lunes y Martes)
+(9, 'Lunes', '09:00:00', '12:00:00', 1),
+(9, 'Martes', '09:00:00', '12:00:00', 1),
+-- Profesional 10 (Miércoles y Jueves)
+(10, 'Miercoles', '09:00:00', '12:00:00', 1),
+(10, 'Jueves', '09:00:00', '12:00:00', 1),
+-- Profesional 11 (Viernes y Sábado)
+(11, 'Viernes', '09:00:00', '12:00:00', 1),
+(11, 'Sabado', '09:00:00', '12:00:00', 1),
+-- Profesional 12 (Lunes y Martes)
+(12, 'Lunes', '09:00:00', '12:00:00', 1),
+(12, 'Martes', '09:00:00', '12:00:00', 1),
+-- Profesional 13 (Miércoles y Jueves)
+(13, 'Miercoles', '09:00:00', '12:00:00', 1),
+(13, 'Jueves', '09:00:00', '12:00:00', 1),
+-- Profesional 41 (Lunes y Martes)
+(41, 'Lunes', '09:00:00', '12:00:00', 1),
+(41, 'Martes', '09:00:00', '12:00:00', 1),
+-- Profesional 42 (Miercoles y Jueves)
+(42, 'Miercoles', '09:00:00', '12:00:00', 1),
+(42, 'Jueves', '09:00:00', '12:00:00', 1),
+-- Profesional 43 (Viernes y Sabado)
+(43, 'Viernes', '09:00:00', '12:00:00', 1),
+(43, 'Sabado', '09:00:00', '12:00:00', 1),
+-- Profesional 44 (Lunes y Martes)
+(44, 'Lunes', '09:00:00', '12:00:00', 1),
+(44, 'Martes', '09:00:00', '12:00:00', 1),
+-- Profesional 45 (Miercoles y Jueves)
+(45, 'Miercoles', '09:00:00', '12:00:00', 1),
+(45, 'Jueves', '09:00:00', '12:00:00', 1),
+-- Profesional 46 (Viernes y Sabado)
+(46, 'Viernes', '09:00:00', '12:00:00', 1),
+(46, 'Sabado', '09:00:00', '12:00:00', 1),
+-- Profesional 47 (Lunes y Martes)
+(47, 'Lunes', '09:00:00', '12:00:00', 1),
+(47, 'Martes', '09:00:00', '12:00:00', 1),
+-- Profesional 48 (Miercoles y Jueves)
+(48, 'Miercoles', '09:00:00', '12:00:00', 1),
+(48, 'Jueves', '09:00:00', '12:00:00', 1),
+-- Profesional 49 (Viernes y Sabado)
+(49, 'Viernes', '09:00:00', '12:00:00', 1),
+(49, 'Sabado', '09:00:00', '12:00:00', 1),
+-- Profesional 50 (Lunes y Martes)
+(50, 'Lunes', '09:00:00', '12:00:00', 1),
+(50, 'Martes', '09:00:00', '12:00:00', 1),
+-- Profesional 51 (Miercoles y Jueves)
+(51, 'Miercoles', '09:00:00', '12:00:00', 1),
+(51, 'Jueves', '09:00:00', '12:00:00', 1),
+-- Profesional 52 (Viernes y Sabado)
+(52, 'Viernes', '09:00:00', '12:00:00', 1),
+(52, 'Sabado', '09:00:00', '12:00:00', 1),
+-- Profesional 53 (Lunes y Martes)
+(53, 'Lunes', '09:00:00', '12:00:00', 1),
+(53, 'Martes', '09:00:00', '12:00:00', 1),
+-- Profesional 54 (Miercoles y Jueves)
+(54, 'Miercoles', '09:00:00', '12:00:00', 1),
+(54, 'Jueves', '09:00:00', '12:00:00', 1),
+-- Profesional 55 (Viernes y Sabado)
+(55, 'Viernes', '09:00:00', '12:00:00', 1),
+(55, 'Sabado', '09:00:00', '12:00:00', 1),
+-- Profesional 56 (Lunes y Martes)
+(56, 'Lunes', '09:00:00', '12:00:00', 1),
+(56, 'Martes', '09:00:00', '12:00:00', 1),
+-- Profesional 57 (Miercoles y Jueves)
+(57, 'Miercoles', '09:00:00', '12:00:00', 1),
+(57, 'Jueves', '09:00:00', '12:00:00', 1),
+-- Profesional 58 (Viernes y Sabado)
+(58, 'Viernes', '09:00:00', '12:00:00', 1),
+(58, 'Sabado', '09:00:00', '12:00:00', 1),
+-- Profesional 59 (Lunes y Martes)
+(59, 'Lunes', '09:00:00', '12:00:00', 1),
+(59, 'Martes', '09:00:00', '12:00:00', 1),
+-- Profesional 60 (Miercoles y Jueves)
+(60, 'Miercoles', '09:00:00', '12:00:00', 1),
+(60, 'Jueves', '09:00:00', '12:00:00', 1);
 
 -- Tabla turno
 CREATE TABLE turno (    
@@ -400,40 +466,39 @@ CREATE TABLE turno (
     FOREIGN KEY (id_profesional) REFERENCES persona(id_persona),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
--- EXISTENTES
 INSERT INTO turno (comprobante, id_paciente, id_profesional, fecha_hora, duracion, id_estado, observaciones)
 VALUES
-('ST-20250506-000001', 14, 3, '2025-06-10 09:00:00', 30, 9, 'Consulta general de salud'), 
-('ST-20250506-000002', 15, 4, '2025-06-11 10:00:00', 30, 9, 'Chequeo pediátrico'), 
-('ST-20250506-000003', 16, 5, '2025-06-12 14:00:00', 45, 9, 'Consulta cardiológica'), 
-('ST-20250506-000004', 17, 6, '2025-06-13 11:00:00', 30, 9, 'Consulta general'), 
-('ST-20250506-000005', 18, 7, '2025-06-14 16:00:00', 45, 9, 'Consulta ginecológica'), 
-('ST-20250506-000006', 19, 8, '2025-06-15 10:00:00', 30, 9, 'Chequeo general'),
-('ST-20250701-000007', 20, 9, '2025-07-01 09:00:00', 30, 9, 'Control clínico rutinario'),
-('ST-20250702-000008', 21, 10, '2025-07-02 10:30:00', 45, 9, 'Consulta por síntomas respiratorios'),
-('ST-20250703-000009', 22, 11, '2025-07-03 11:00:00', 30, 9, 'Revisión pediátrica'),
-('ST-20250704-000010', 23, 12, '2025-07-04 12:00:00', 45, 9, 'Control ginecológico anual'),
-('ST-20250705-000011', 24, 13, '2025-07-05 13:30:00', 30, 9, 'Chequeo general'),
-('ST-20250706-000012', 25, 14, '2025-07-06 14:00:00', 45, 9, 'Control post-operatorio'),
-('ST-20250707-000013', 26, 15, '2025-07-07 15:00:00', 30, 9, 'Evaluación prequirúrgica'),
-('ST-20250708-000014', 27, 16, '2025-07-08 09:30:00', 30, 9, 'Control clínico'),
-('ST-20250709-000015', 28, 17, '2025-07-09 10:00:00', 45, 9, 'Consulta por dolores articulares'),
-('ST-20250710-000016', 29, 18, '2025-07-10 11:30:00', 30, 9, 'Control general anual'),
-('ST-20250711-000017', 30, 19, '2025-07-11 09:00:00', 30, 9, 'Consulta clínica'),
-('ST-20250712-000018', 21, 20, '2025-07-12 10:00:00', 45, 9, 'Revisión post tratamiento'),
-('ST-20250713-000019', 22, 21, '2025-07-13 11:00:00', 30, 9, 'Chequeo cardiológico'),
-('ST-20250714-000020', 23, 22, '2025-07-14 12:00:00', 45, 9, 'Consulta pediátrica de seguimiento'),
-('ST-20250715-000021', 24, 23, '2025-07-15 13:00:00', 30, 9, 'Control ginecológico semestral'),
-('ST-20250716-000022', 31, 24, '2025-07-16 09:00:00', 30, 9, 'Consulta general de salud'),
-('ST-20250717-000023', 32, 25, '2025-07-17 10:00:00', 30, 9, 'Chequeo pediátrico'),
-('ST-20250718-000024', 33, 26, '2025-07-18 11:00:00', 45, 9, 'Consulta cardiológica'),
-('ST-20250719-000025', 34, 27, '2025-07-19 09:30:00', 30, 9, 'Consulta general'),
-('ST-20250720-000026', 35, 28, '2025-07-20 10:30:00', 45, 9, 'Consulta ginecológica'),
-('ST-20250721-000027', 36, 29, '2025-07-21 11:30:00', 30, 9, 'Chequeo general'),
-('ST-20250722-000028', 37, 30, '2025-07-22 09:00:00', 30, 9, 'Control clínico rutinario'),
-('ST-20250723-000029', 38, 31, '2025-07-23 10:00:00', 45, 9, 'Consulta por síntomas respiratorios'),
-('ST-20250724-000030', 39, 32, '2025-07-24 11:00:00', 30, 9, 'Revisión pediátrica'),
-('ST-20250725-000031', 40, 33, '2025-07-25 12:00:00', 45, 9, 'Control ginecológico anual');
+('ST-20250615-000001', 14, 3, '2025-06-25 09:00:00', 30, 10, 'Chequeo pediátrico'), 
+('ST-20250615-000002', 15, 4, '2025-06-25 09:30:00', 30, 10, 'Consulta pediátrica'), 
+('ST-20250615-000003', 16, 5, '2025-06-25 10:00:00', 30, 10, 'Consulta ginecológica'), 
+('ST-20250615-000004', 17, 6, '2025-06-26 10:30:00', 30, 10, 'Consulta general'), 
+('ST-20250615-000005', 18, 7, '2025-06-26 11:00:00', 30, 10, 'Consulta general'), 
+('ST-20250615-000006', 19, 8, '2025-06-27 11:30:00', 30, 10, 'Consulta pediátrica'),
+('ST-20250615-000007', 20, 9, '2025-07-01 09:00:00', 30, 10, 'Consulta pediátrica'),
+('ST-20250615-000008', 21, 10, '2025-07-02 09:30:00', 30, 10, 'Consulta cardiológica'),
+('ST-20250615-000009', 22, 11, '2025-07-03 10:00:00', 30, 10, 'Consulta cardiológica'),
+('ST-20250615-000010', 23, 12, '2025-07-04 10:30:00', 30, 10, 'Control ginecológico anual'),
+('ST-20250616-000001', 24, 13, '2025-07-05 11:00:00', 30, 10, 'Consulta ginecológica'),
+('ST-20250616-000002', 25, 41, '2025-07-06 11:30:00', 30, 10, 'Chequeo clinico'),
+('ST-20250616-000003', 26, 42, '2025-07-07 09:00:00', 30, 10, 'Consulta pediátrica'),
+('ST-20250616-000004', 27, 43, '2025-07-08 09:30:00', 30, 10, 'Consulta cardiológica'),
+('ST-20250616-000005', 28, 44, '2025-07-09 10:00:00', 30, 10, 'Consulta ginecológica'),
+('ST-20250616-000006', 29, 45, '2025-07-10 11:30:00', 30, 10, 'Chequeo clinico'),
+('ST-20250616-000007', 30, 46, '2025-07-11 09:00:00', 30, 10, 'Consulta pediátrica'),
+('ST-20250616-000008', 21, 47, '2025-07-12 09:30:00', 30, 10, 'Consulta cardiológica'),
+('ST-20250616-000009', 22, 48, '2025-07-13 10:00:00', 30, 10, 'Consulta ginecológica'),
+('ST-20250616-000010', 23, 49, '2025-07-14 10:30:00', 30, 10, 'Consulta clinica'),
+('ST-20250617-000001', 24, 50, '2025-07-15 11:00:00', 30, 10, 'Control pediátrica'),
+('ST-20250617-000002', 31, 51, '2025-07-16 11:30:00', 30, 9, 'Consulta general de salud'),
+('ST-20250617-000003', 32, 52, '2025-07-17 09:00:00', 30, 9, 'Chequeo pediátrico'),
+('ST-20250617-000004', 33, 53, '2025-07-18 09:30:00', 30, 9, 'Consulta cardiológica'),
+('ST-20250617-000005', 34, 54, '2025-07-19 10:00:00', 30, 9, 'Consulta ginecológica'),
+('ST-20250617-000006', 35, 55, '2025-07-20 10:30:00', 30, 9, 'Consulta general'),
+('ST-20250617-000007', 36, 56, '2025-07-21 11:00:00', 30, 9, 'Consulta pediátrica'),
+('ST-20250617-000008', 37, 57, '2025-07-22 11:30:00', 30, 9, 'Consulta cardiológica'),
+('ST-20250617-000009', 38, 58, '2025-07-23 09:00:00', 30, 9, 'Consulta ginecológica'),
+('ST-20250617-000010', 39, 59, '2025-07-24 09:30:00', 30, 9, 'Chequeo clinico general'),
+('ST-20250617-000011', 40, 60, '2025-07-25 10:00:00', 30, 9, 'Chequeo pediátrico');
 
 -- Tabla historial_estado_turno
 CREATE TABLE historial_estado_turno (    
@@ -458,14 +523,6 @@ CREATE TABLE monto (
     FOREIGN KEY (id_turno) REFERENCES turno(id_turno),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
-INSERT INTO monto (id_turno, fecha_pago, monto, id_estado)
-VALUES
-(1, '2025-05-10', 500.00, 1), 
-(2, '2025-05-11', 400.00, 1), 
-(3, '2025-05-12', 700.00, 1), 
-(4, '2025-05-13', 500.00, 1), 
-(5, '2025-05-14', 600.00, 1), 
-(6, '2025-05-15', 500.00, 1);
 
 -- Tabla consulta_web
 CREATE TABLE consulta_web (
@@ -477,14 +534,6 @@ CREATE TABLE consulta_web (
     id_estado BIGINT NOT NULL,
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
-INSERT INTO consulta_web (nombre, correo, mensaje, id_estado)
-VALUES
-('Juan Pérez', 'juan.perez@gmail.com', 'Quisiera saber los horarios de atención del médico general.', 1), 
-('Ana García', 'ana.garcia@gmail.com', '¿Cómo puedo agendar un turno para pediatría?', 1), 
-('Luis Martínez', 'luis.martinez@gmail.com', 'Tengo dudas sobre los servicios de cardiología.', 1), 
-('Marta López', 'marta.lopez@gmail.com', '¿Cuáles son los requisitos para un turno con ginecología?', 1), 
-('Carlos Rodríguez', 'carlos.rodriguez@gmail.com', 'Necesito cancelar un turno con el doctor.', 1), 
-('Elena Sánchez', 'elena.sanchez@gmail.com', '¿Hay disponibilidad para turno en la próxima semana?', 1);
 
 -- Tabla asistencia_turno
 CREATE TABLE asistencia_turno (
@@ -497,11 +546,3 @@ CREATE TABLE asistencia_turno (
     FOREIGN KEY (id_turno) REFERENCES turno(id_turno),
     FOREIGN KEY (id_estado) REFERENCES estado(id_estado)
 );
-INSERT INTO asistencia_turno (id_turno, asistio, observaciones, id_estado)
-VALUES
-(1, 1, 'El paciente asistió a su turno a la hora acordada.', 1), 
-(2, 0, 'El paciente no se presentó al turno programado.', 1), 
-(3, 1, 'El paciente llegó 10 minutos antes de la hora programada y fue atendido sin inconvenientes.', 1), 
-(4, 0, 'El paciente canceló el turno con 24 horas de anticipación.', 1), 
-(5, 1, 'El paciente asistió puntualmente y completó la consulta médica.', 1), 
-(6, 0, 'El paciente no se presentó sin previo aviso y no contactó a la clínica.', 1);
