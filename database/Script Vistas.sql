@@ -77,6 +77,7 @@ JOIN especialidad e ON p.id_especialidad = e.id_especialidad
 WHERE p.id_estado = 1;  -- Mostrar solo profesionales activos
 
 -- Vista de tutores
+USE clinica;
 CREATE VIEW vista_paciente_tutor AS
 SELECT 
     pt.id_paciente, 
